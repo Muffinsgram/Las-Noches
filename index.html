@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAS NOCHES | PRO ESPORTS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Teko:wght@400;600&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="shortcut icon" href="src/img/logo.jpeg" type="image/x-icon">
+</head>
+<body>
+
+    <div class="particles"></div>
+    <div class="grid-bg"></div>
+
+    <div class="loader-wrapper">
+        <div class="loader-logo">LN</div>
+        <div class="loader-bar"></div>
+    </div>
+
+    <div id="joinModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            
+            <div id="applicationFormContainer">
+                <div class="modal-header">
+                    <h2>TAKIMA <span>KATIL</span></h2>
+                </div>
+                <p>Efsaneler arasına ismini yazdır.</p>
+                <form id="appForm">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="ign" placeholder="Kullanıcı Adı (IGN)" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fab fa-discord"></i>
+                        <input type="text" id="discord" placeholder="Discord ID (Örn: user#1234)" required>
+                    </div>
+                    <div class="game-select">
+                        <label>
+                            <input type="radio" name="game" value="val" checked>
+                            <span class="radio-box val">VALORANT</span>
+                        </label>
+                        <!-- <label>
+                            <input type="radio" name="game" value="cs">
+                            <span class="radio-box cs">CS2</span>
+                        </label> -->
+                    </div>
+                    <input type="text" id="rank" placeholder="Rank / Rütbe (Örn: Ascendant 1)" class="simple-input" required>
+                    <button type="submit" class="hybrid-btn full" id="submitBtn">
+                        <span>BAŞVURU GÖNDER</span>
+                    </button>
+                </form>
+            </div>
+
+            <div id="successMessage" style="display: none; text-align: center; padding: 20px;">
+                <i class="fas fa-check-circle" style="font-size: 5rem; color: #00ff88; margin-bottom: 20px; animation: popIn 0.5s;"></i>
+                <h2 style="font-family: var(--font-head); font-size: 2.5rem;">BAŞVURU ALINDI!</h2>
+                <p style="color: #aaa; margin-top: 10px;">Discord üzerinden seninle iletişime geçeceğiz.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="videoModal" class="video-modal">
+        <div class="video-modal-content">
+            <span class="close-video">&times;</span>
+            <div class="responsive-iframe-container">
+                <iframe id="youtubePlayer" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="logo-area">
+            <img src="src/img/logo.jpeg" alt="Logo" class="logo-img">
+            <div class="brand">LAS <span>NOCHES</span></div>
+        </div>
+        
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="#">ANA SAYFA</a></li>
+                <li><a href="#roster">KADRO</a></li>
+                <li><a href="#matches">MAÇ MERKEZİ</a></li>
+                <li><a href="#media">MEDYA</a></li>
+                <li><a href="#news">HABERLER</a></li> 
+                <li><a href="#community">TOPLULUK</a></li> 
+                <li><a href="#faq">S.S.S.</a>
+            </ul>
+        </nav>
+
+        <div class="header-right">
+            <button class="hybrid-btn desktop-btn" id="openModalBtn">
+                <i class="fas fa-user-plus"></i> KATIL
+            </button>
+            <div class="hamburger" id="hamburgerBtn">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#" onclick="closeMenu()">ANA SAYFA</a>
+        <a href="#roster" onclick="closeMenu()">KADRO</a>
+        <a href="#matches" onclick="closeMenu()">MAÇ MERKEZİ</a>
+        <a href="#media" onclick="closeMenu()">MEDYA</a>
+        <button class="hybrid-btn full" onclick="openModalFromMobile()">TAKIMA KATIL</button>
+    </div>
+
+    <section class="hero hidden-animate">
+        <div class="hero-text">
+            <div class="game-tags">
+                <span class="tag cs">CS2</span>
+                <span class="tag val">VALORANT</span>
+            </div>
+            <h1>SINIRLARI <br> <span class="gradient-text">YOK ET</span></h1>
+            <p>Taktiksel zeka ve keskin aim'in buluşma noktası. Las Noches arenaya hükmediyor.</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="num">#1</span>
+                    <span class="desc">BÖLGESEL</span>
+                </div>
+                <div class="stat">
+                    <span class="num">84%</span>
+                    <span class="desc">WIN RATE</span>
+                </div>
+            </div>
+        </div>
+        <div class="countdown-card">
+            <div class="card-head">Yapımcı</div>
+            <div id="countdown" class="timer">24.01.2026</div>
+            <div class="vs-info">Muffinsgram</div>
+        </div>
+    </section>
+    <section id="roster" class="roster-section">
+            <div><br><br></div>
+            <div><br><br></div>
+        <h2 class="section-title">PRO <span>ROSTER</span></h2>
+        <div class="roster-grid">
+            
+            <div class="pro-card val-theme hidden-animate">
+                <div class="card-inner">
+                    <div class="card-img" style="background-image: url('src/img/Muffinsgramlogo.png');"></div>
+                    <div class="card-content">
+                        <div class="top-info">
+                            <span class="role"><i class="fas fa-crosshairs"></i> DUELIST</span>
+                            <div class="game-logo">VALORANT</div>
+                        </div>
+                        <div class="main-info">
+                            <h3>Muffin ツ</h3>
+                            <p class="real-name">Emirhan Özpınar</p>
+                        </div>
+                        <div class="stats-box">
+                            <div class="stat"><span class="val">1.42</span><span class="lbl">KD</span></div>
+                            <div class="stat"><span class="val">68%</span><span class="lbl">HS</span></div>
+                            <div class="stat"><span class="val">JETT</span><span class="lbl">MAIN</span></div>
+                        </div>
+                        <div class="social-links">
+                            <a onclick="open" href="https://www.youtube.com/@Muffinsgram"><i class="fab fa-youtube"></i></a>
+                            <a href="https://kick.com/muffinsgram"><i class="fab fa-kickstarter-k"></i></a>
+                            <a href="https://www.instagram.com/muffinsgram/"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pro-card val-theme hidden-animate">
+                <div class="card-inner">
+                    <div class="card-img" style="background-image: url('src/img/IceQuarel.png');"></div>
+                    <div class="card-content">
+                        <div class="top-info">
+                            <span class="role"><i class="fas fa-wind"></i> SENTINEL</span>
+                            <div class="game-logo">VALORANT</div>
+                        </div>
+                        <div class="main-info">
+                            <h3>IceQuarel</h3>
+                            <p class="real-name">İbrahim Aldemir</p>
+                        </div>
+                        <div class="stats-box">
+                            <div class="stat"><span class="val">1.85</span><span class="lbl">KD</span></div>
+                            <div class="stat"><span class="val">42%</span><span class="lbl">HS</span></div>
+                            <div class="stat"><span class="val">CHAMBER</span><span class="lbl">MAIN</span></div>
+                        </div>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-twitch"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pro-card val-theme hidden-animate">
+                <div class="card-inner">
+                    <div class="card-img" style="background-image: url('src/img/L0zzy.png');"></div>
+                    <div class="card-content">
+                        <div class="top-info">
+                            <span class="role"><i class="fas fa-smog"></i> SMOKER</span>
+                            <div class="game-logo">VALORANT</div>
+                        </div>
+                        <div class="main-info">
+                            <h3>L0zzy</h3>
+                            <p class="real-name">Ömer Osman Kömür</p>
+                        </div>
+                        <div class="stats-box">
+                            <div class="stat"><span class="val">1.55</span><span class="lbl">KD</span></div>
+                            <div class="stat"><span class="val">75%</span><span class="lbl">HS</span></div>
+                            <div class="stat"><span class="val">CLOVE</span><span class="lbl">MAIN</span></div>
+                        </div>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-twitch"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pro-card val-theme hidden-animate">
+                <div class="card-inner">
+                    <div class="card-img" style="background-image: url('src/img/.png');"></div>
+                    <div class="card-content">
+                        <div class="top-info">
+                            <span class="role"><i class="fas fa-brain"></i>SENTINEL</span>
+                            <div class="game-logo">VAL</div>
+                        </div>
+                        <div class="main-info">
+                            <h3>Dashツ</h3>
+                            <p class="real-name">Emre Obez</p>
+                        </div>
+                        <div class="stats-box">
+                            <div class="stat"><span class="val">1.10</span><span class="lbl">KD</span></div>
+                            <div class="stat"><span class="val">95%</span><span class="lbl">HS</span></div>
+                            <div class="stat"><span class="val">Clove</span><span class="lbl">MAIN</span></div>
+                        </div>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-twitch"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="matches" class="matches-section">
+        <h2 class="section-title">MAÇ <span>MERKEZİ</span></h2>
+        <div class="match-tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'upcoming')">GELECEK MAÇLAR</button>
+            <button class="tab-btn" onclick="openTab(event, 'results')">SONUÇLAR</button>
+        </div>
+
+        <div id="upcoming" class="tab-content active hidden-animate">
+            <div class="pro-match-card live">
+                 <div class="card-header">
+                    <span class="tourney">PREMIER</span>
+                    <span class="live-tag">● YAKINDA</span>
+                </div>
+                <div class="match-body">
+                    <div class="team home">
+                        <div class="logo-box">LN</div>
+                        <span class="name">LAS NOCHES</span>
+                    </div>
+                    <div class="vs-center"><span class="vs-text">VS</span></div>
+                    <div class="team away">
+                        <div class="logo-box enemy"></div>   
+                        <span class="name"></span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="watch-btn yt-trigger" data-youtube-id="https://youtu.be/pGheISDjD2g"><i class="fab fa-youtube"></i> İZLE</button>
+                </div> 
+            </div>
+
+            <!-- <div class="pro-match-card">
+                <div class="card-header">
+                    <span class="tourney cs-color">ESL PRO LEAGUE</span>
+                    <span class="date">YARIN - 20:00</span>
+                </div>
+                <div class="match-body">
+                    <div class="team home">
+                        <div class="logo-box">LN</div>
+                        <span class="name">LAS NOCHES</span>
+                    </div>
+                    <div class="vs-center"><span class="game-icon cs"><i class="fas fa-crosshairs"></i></span></div>
+                    <div class="team away">
+                        <div class="logo-box enemy">NAVI</div>
+                        <span class="name">NAVI</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="notify-btn"><i class="far fa-bell"></i> HATIRLAT</button>
+                </div>-->
+            </div>
+        </div> 
+
+        <div id="results" class="tab-content hidden-animate">
+            <!-- <div class="result-row win">
+                <div class="game-tag val">VAL</div>
+                <div class="match-info-row">
+                    <span class="team-name">LAS NOCHES</span><span class="score win">2</span><span class="divider">-</span><span class="score">0</span><span class="team-name">BBL</span>
+                </div>
+                <span class="map-name">HAVEN / ASCENT</span>
+            </div> -->
+            <h1 style="text-align: center;">GÖSTERİLECEK MAÇ YOK</h1>
+            <!-- <div class="result-row loss">
+                <div class="game-tag cs">CS2</div>
+                <div class="match-info-row">
+                    <span class="team-name">LAS NOCHES</span><span class="score">13</span><span class="divider">-</span><span class="score win">16</span><span class="team-name">G2</span>
+                </div>
+                <span class="map-name">MIRAGE</span>
+            </div> -->
+        </div>
+    </section>
+
+    <section id="media" class="media-section">
+        <h2 class="section-title">MEDYA <span>GALERİSİ</span></h2>
+        <div class="media-container hidden-animate">
+            <h1 style="text-align: right;">GÖSTERİLECEK KLİP YOK</h1>
+            <!-- <div class="featured-video yt-trigger" data-youtube-id="https://youtu.be/pGheISDjD2g">
+                <div class="video-overlay">
+                    <div class="play-button"><i class="fas fa-play"></i></div>
+                    <div class="video-info">
+                        <span class="tag">HIGHLIGHTS</span>
+                        <h3>BÜYÜK FİNAL: ŞAMPİYONLUK ANI</h3>
+                    </div>
+                </div>
+                <img src="" class="thumb-img yt-thumb">
+            </div>
+
+            <div class="clip-grid">
+                <div class="clip-item yt-trigger" data-youtube-id="https://youtu.be/dgooQXARn1M">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                    <img src="" class="yt-thumb">
+                    <div class="clip-title">CS2: Insane Clutch</div>
+                </div>
+                <div class="clip-item yt-trigger" data-youtube-id="dgooQXARn1M">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                    <img src="" class="yt-thumb">
+                    <div class="clip-title">VALORANT: 1v5 Ace</div>
+                </div>
+                <div class="clip-item yt-trigger" data-youtube-id="https://youtu.be/dgooQXARn1M">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                    <img src="" class="yt-thumb">
+                    <div class="clip-title">Team Comms & Funny Moments</div>
+                </div>
+            </div> -->
+        </div>
+    </section>
+<div id="news"></div>
+        <h2 class="section-title"><br>SON <span>HABERLER</span></h2>
+<section class="news-section">
+        <div class="news-grid">
+            <div class="news-card hidden-animate">
+                <div class="news-img">
+                    <img src="src/img/logo.jpeg" alt="News 1">
+                    <span class="news-date">24 OCAK 2026</span>
+                </div>
+                <div class="news-content">
+                    <span class="news-tag val">VALORANT</span>
+                    <h3>TAKIM KURULDU</h3>
+                    <p>Las Noches, Artık Premierde</p>
+                    <button class="read-more-btn" 
+                        data-title="YENİ TRANSFER: 'SHADOW' KADROYA KATILDI" 
+                        data-img="https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt6f70829147573489/61d90c0003b74e643a6d71f5/VAL_EP4_HOMEPAGE-HERO_Desktop.jpg"
+                        data-date="24 OCAK 2026"
+                        data-text="Las Noches Espor Kulübü olarak Valorant kadromuzu güçlendirmeye devam ediyoruz. Bölgesel ligin en yüksek KDA oranına sahip oyuncusu 'Shadow', önümüzdeki sezonda formamızı terletecek. Shadow yaptığı açıklamada: 'Bu ailenin bir parçası olduğum için gururluyum, hedefimiz şampiyonluk' dedi. Takım koçumuz Brain ise transferin taktiksel çeşitliliği artıracağını belirtti.">
+                        DEVAMINI OKU <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+<!-- 
+            <div class="news-card hidden-animate" style="transition-delay: 0.1s;">
+                <div class="news-img">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj8eX9XqQvC5qQx22q4T6J8f8h-T8q8y4R8e9X0qQvC5qQx22q4T6J8f8h-T8q8y4R8e9X0qQvC5qQx22q4T6J8f8h-T8q8y4R8e9X0/s1600/csgo-agent.png" alt="News 2">
+                    <span class="news-date">22 OCAK 2026</span>
+                </div>
+                <div class="news-content">
+                    <span class="news-tag cs">CS2</span>
+                    <h3>MAJOR TURNUVASI HAZIRLIKLARI</h3>
+                    <p>Takımımız Almanya'daki bootcamp kampına giriş yaptı. Hedef şampiyonluk...</p>
+                    <button class="read-more-btn" 
+                        data-title="MAJOR TURNUVASI HAZIRLIKLARI BAŞLADI" 
+                        data-img="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj8eX9XqQvC5qQx22q4T6J8f8h-T8q8y4R8e9X0qQvC5qQx22q4T6J8f8h-T8q8y4R8e9X0qQvC5qQx22q4T6J8f8h-T8q8y4R8e9X0/s1600/csgo-agent.png"
+                        data-date="22 OCAK 2026"
+                        data-text="Counter-Strike 2 takımımız, yaklaşan Major turnuvası öncesi Almanya'da 2 haftalık yoğun bir kampa girdi. Günde 10 saatlik antrenman programı ile aim ve strateji çalışmaları yapılıyor. Takım kaptanı Kenny_S, moralin yüksek olduğunu ve kupayı eve getirmek istediklerini söyledi.">
+                        DEVAMINI OKU <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="news-card hidden-animate" style="transition-delay: 0.2s;">
+                <div class="news-img">
+                    <img src="https://wallpapers.com/images/hd/purple-gaming-setup-1920-x-1080-wallpaper-h5h0j5k0j5k0j5k0.jpg" alt="News 3">
+                    <span class="news-date">20 OCAK 2026</span>
+                </div>
+                <div class="news-content">
+                    <span class="news-tag">TOPLULUK</span>
+                    <h3>LAS NOCHES AKADEMİ SEÇMELERİ</h3>
+                    <p>Geleceğin yıldızı sen olabilirsin. Akademi başvuruları discord üzerinden açıldı...</p>
+                    <button class="read-more-btn" 
+                        data-title="LAS NOCHES AKADEMİ SEÇMELERİ BAŞLADI" 
+                        data-img="https://wallpapers.com/images/hd/purple-gaming-setup-1920-x-1080-wallpaper-h5h0j5k0j5k0j5k0.jpg"
+                        data-date="20 OCAK 2026"
+                        data-text="Espor dünyasına yeni yetenekler kazandırmak amacıyla Las Noches Akademi kapılarını açıyor! Valorant ve CS2 branşlarında kendine güvenen, Rank'ı yüksek oyuncuları bekliyoruz. Başvurular sadece Discord sunucumuz üzerinden 'Akademi Başvuru' kanalından yapılacaktır. Seçilen oyuncular ana kadro ile antrenman şansı yakalayacak.">
+                        DEVAMINI OKU <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div> -->
+            </div>
+        </div>
+    </section>
+    <div id="community"></div>
+    <section class="discord-section hidden-animate">
+        <div class="discord-overlay"></div>
+        <div class="discord-container">
+            <h2 class="section-title"><br>DİSCORDA <span>KATIL</span></h2>
+            <div class="dc-glass-card">
+                <div class="dc-left">
+                    <div class="dc-icon-wrapper">
+                        <i class="fab fa-discord"></i>
+                        <div class="online-dot"></div>
+                    </div>
+                    <div class="dc-text">
+                        <h2>TOPLULUĞA <br> <span>KATIL</span></h2>
+                        <p>Turnuvalar, özel çekilişler ve oyuncularla sohbet için resmi sunucumuza davetlisin.</p>
+                        <div class="live-count">
+                            <span class="pulse-green"></span> <span id="memberCount">0</span>+ AKTİF ÜYE
+                        </div>
+                    </div>
+                </div>
+                <div class="dc-right">
+                    <a href="https://discord.gg/gFAF3u9jC9" style="text-underline-offset: unset;">
+                    <button class="join-dc-btn">
+                        <span>SUNUCUYA GİR</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="newsModal" class="modal news-modal">
+        <div class="modal-content news-content-wrapper">
+            <span class="close-btn close-news">&times;</span>
+            <div class="news-modal-img">
+                <img id="modalNewsImg" src="" alt="Haber Detay">
+            </div>
+            <div class="news-modal-body">
+                <span id="modalNewsDate" class="modal-date">TARİH</span>
+                <h2 id="modalNewsTitle">BAŞLIK</h2>
+                <div class="news-text-scroll">
+                    <p id="modalNewsText">İçerik...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<section id="faq" class="faq-section">
+        <h2 class="section-title">S.S.S. <span>(FAQ)</span></h2>
+        <div class="faq-container">
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Takıma alım şartları nelerdir?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Valorant için en az <strong>Immortal</strong>, CS2 için en az <strong>Faceit Lvl 10</strong> olmanız gerekmektedir. Ayrıca 16 yaşından büyük olmalı ve takım içi iletişime önem vermelisiniz.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Antrenman saatleri nasıl?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Ana kadro haftada 5 gün, günde en az 6 saat antrenman (scrim + teori) yapar. Akademi takımları için program daha esnektir.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Sponsorluk başvurusu yapabilir miyim?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Evet! İş birlikleri için <strong>contact@lasnoches.com</strong> adresine mail atabilir veya Discord üzerinden yönetim ekibine ulaşabilirsiniz.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <section class="partners-section">
+        <div class="marquee-wrapper">
+            <div class="marquee-content">
+                <span><i class="fab fa-playstation"></i> Muffinsgram</span>
+                <span><i class="fas fa-microchip"></i> IceQuarel</span>
+                <span><i class="fas fa-headset"></i> L0zzy</span>
+                <span><i class="fas fa-bolt"></i> Dashツ</span>
+               <span><i class="fab fa-playstation"></i> Muffinsgram</span>
+                <span><i class="fas fa-microchip"></i> IceQuarel</span>
+                <span><i class="fas fa-headset"></i> L0zzy</span>
+                <span><i class="fas fa-bolt"></i> Dashツ</span>               
+                <span><i class="fab fa-playstation"></i> Muffinsgram</span>
+                <span><i class="fas fa-microchip"></i> IceQuarel</span>
+                <span><i class="fas fa-headset"></i> L0zzy</span>
+                <span><i class="fas fa-bolt"></i> Dashツ</span>               
+                <span><i class="fab fa-playstation"></i> Muffinsgram</span>
+                <span><i class="fas fa-microchip"></i> IceQuarel</span>
+                <span><i class="fas fa-headset"></i> L0zzy</span>
+                <span><i class="fas fa-bolt"></i> Dashツ</span>
+            </div>
+        </div>
+    </section>
+
+    <footer class="pro-footer">
+        <div class="footer-grid">
+            
+            <div class="footer-col brand-col">
+                <div class="f-logo">LAS <span>NOCHES</span></div>
+                <p>2026 yılında kurulan, sınırları zorlayan global e-spor organizasyonu. Geceye hükmetmeye hazır mısın?</p>
+                <div class="f-socials">
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>HIZLI ERİŞİM</h4>
+                <ul>
+                    <li><a href="#">Ana Sayfa</a></li>
+                    <li><a href="#roster">Kadro</a></li>
+                    <li><a href="#matches">Maçlar</a></li>
+                    <li><a href="#news">Haberler</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>OYUNLAR</h4>
+                <ul>
+                    <li><a href="#">Valorant</a></li>
+                    <!-- <li><a href="#">CS2</a></li>
+                    <li><a href="#">League of Legends</a></li>
+                    <li><a href="#">TFT</a></li> -->
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>GÜNCEL KAL</h4>
+                <p>Haberler ve çekilişler için mail listemize katıl.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="E-mail adresi...">
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 LAS NOCHES ESPORTS. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+    <script src="src/js/script.js"></script>
+</body>
+</html>
