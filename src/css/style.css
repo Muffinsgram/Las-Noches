@@ -13,7 +13,7 @@
 
 html { scroll-behavior: smooth; }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; cursor: none;}
 
 body {
     background-color: var(--darker);
@@ -21,6 +21,12 @@ body {
     font-family: var(--font-body);
     overflow-x: hidden;
     background: radial-gradient(circle at top right, #1a1a2e, #050505);
+ 
+}
+
+a:link {
+    text-decoration: none;
+    
 }
 
 body.no-scroll { overflow: hidden; }
@@ -139,7 +145,7 @@ input:checked + .radio-box.cs { background: var(--cs-orange); color: white; bord
 .hero {
     height: 85vh; display: flex; align-items: center; justify-content: space-between;
     padding: 0 10%; position: relative;
-    background: linear-gradient(to right, rgba(5,5,5,0.9), rgba(5,5,5,0.4)), url('../img/banner.jpeg');
+    background: linear-gradient(to right, rgba(5,5,5,0.9), rgba(5,5,5,0.4)), url('../img/banner.png');
     background-size: cover; background-position: center;
 }
 .game-tags { margin-bottom: 15px; }
@@ -174,9 +180,16 @@ input:checked + .radio-box.cs { background: var(--cs-orange); color: white; bord
     transition: 0.5s; filter: grayscale(100%) brightness(0.7);
 }
 .card-content {
-    position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px;
-    background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.6), transparent);
-    z-index: 2; transform: translateY(60px); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: absolute; bottom: 0; left: 0; width: 100%;
+    padding: 20px;
+    background: linear-gradient(to top, #000 10%, rgba(0,0,0,0.9) 50%, transparent); /* Daha koyu zemin */
+    z-index: 2;
+    
+    /* ÖNEMLİ: Burayı 60px'den 120px'e çıkardık. 
+       Böylece istatistikler ve buton aşağıda saklanıyor. */
+    transform: translateY(110px); 
+    
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .top-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; opacity: 0; transition: 0.3s; transform: translateY(-10px); }
 .role { font-size: 0.8rem; font-weight: bold; letter-spacing: 2px; color: #ccc; }
@@ -325,11 +338,11 @@ input:checked + .radio-box.cs { background: var(--cs-orange); color: white; bord
     border-radius: 3px;
 }
 
-/* Oynat Butonu (Ortadaki) */
+/* Oynat Butonu (Ortadaki) */   
 .play-button {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: -220%;
+    left: 90%;
     transform: translate(-50%, -50%);
     width: 50px; height: 50px;
     background: rgba(255, 70, 85, 0.9);
@@ -631,7 +644,7 @@ footer { padding: 30px; text-align: center; color: #555; background: #080808; ma
 .f-logo span { color: var(--val-red); }
 .brand-col p { color: #888; line-height: 1.6; margin-bottom: 20px; }
 
-.f-socials { display: flex; gap: 15px; padding-left: 6em;}
+.f-socials { display: flex; gap: 15px;   padding-left: 6em;}
 .f-socials a {
     width: 40px; height: 40px; border-radius: 5px; background: #1a1a1a; color: white;
     display: flex; align-items: center; justify-content: center; transition: 0.3s;
@@ -669,5 +682,231 @@ footer { padding: 30px; text-align: center; color: #555; background: #080808; ma
     0% { transform: scale(0); opacity: 0; }
     80% { transform: scale(1.2); opacity: 1; }
     100% { transform: scale(1); }
-
 }
+
+
+
+/* --- TARİHÇE (TIMELINE) --- */
+.timeline-section {
+    padding: 80px 5%;
+    background: #09090b;
+    position: relative;
+}
+
+.timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Ortadaki Çizgi */
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--val-red), var(--cs-orange));
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -2px;
+    box-shadow: 0 0 15px rgba(255, 70, 85, 0.5);
+    border-radius: 20%;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+    box-sizing: border-box;
+    z-index: 2;
+}
+
+/* Sol ve Sağ Konumlandırma */
+.timeline-item.left { left: 0; text-align: right; }
+.timeline-item.right { left: 50%; text-align: left; }
+
+/* İçerik Kutusu */
+.timeline-content {
+    padding: 20px 30px;
+    background: #141419;
+    border: 1px solid #333;
+    border-radius: 8px;
+    position: relative;
+    transition: 0.3s;
+}
+
+.timeline-content:hover {
+    transform: scale(1.03);
+    border-color: var(--cs-orange);
+    box-shadow: 0 0 20px rgba(222, 155, 53, 0.2);
+}
+
+/* Ortadaki Noktalar */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 4px solid var(--val-red);
+    border-radius: 50%;
+    top: 25px;
+    z-index: 2;
+    box-shadow: 0 0 10px var(--val-red);
+}
+
+.timeline-item.left::after { right: -12px; }
+.timeline-item.right::after { left: -12px; }
+
+/* Metin Stilleri */
+.timeline-content .date {
+    display: inline-block;
+    font-weight: bold;
+    color: var(--cs-orange);
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+}
+
+.timeline-content h3 {
+    font-family: var(--font-head);
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.timeline-content p {
+    color: #999;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Mobil Uyumluluk (Timeline) */
+@media (max-width: 768px) {
+    .timeline::after { left: 31px; } /* Çizgiyi sola al */
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+    
+    .timeline-item.left, .timeline-item.right {
+        left: 0;
+        text-align: left; /* Mobilde hepsi sola yaslansın */
+    }
+    
+    .timeline-item.left::after, .timeline-item.right::after {
+        left: 19px; /* Noktaları çizgiye hizala */
+        
+    }
+}
+
+/* --- YUKARI ÇIK BUTONU --- */
+.scroll-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--val-red);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(255, 70, 85, 0.5);
+    z-index: 999;
+    display: none; /* Başlangıçta gizli */
+    transition: 0.3s;
+    align-items: center;
+    justify-content: center;
+}
+
+.scroll-top-btn:hover {
+    background: white;
+    color: var(--val-red);
+    transform: translateY(-5px);
+}
+
+.scroll-top-btn.visible {
+    display: flex; /* JS ile görünür olacak */
+    animation: fadeIn 0.5s;
+}
+
+
+/* --- CUSTOM CURSOR (NİŞANGAH) --- */
+.cursor {
+    position: fixed; width: 8px; height: 8px;
+    background: var(--val-red); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%); transition: transform 0.1s;
+}
+.cursor-follower {
+    position: fixed; width: 40px; height: 40px;
+    border: 1px solid var(--val-red); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%); transition: transform 0.15s, background 0.3s;
+}
+
+/* Link üzerine gelince efekt */
+.cursor-follower.active {
+    transform: translate(-50%, -50%) scale(1.5);
+    background: rgba(255, 70, 85, 0.1);
+    border-color: var(--cs-orange);
+}
+
+/* Mobilde İmleci Gizle (Dokunmatikte gerek yok) */
+@media (max-width: 768px) {
+    .cursor, .cursor-follower { display: none; }
+}
+
+/* --- CROSSHAIR KOPYALAMA BUTONU --- */
+/* --- CROSSHAIR KOPYALAMA BUTONU (GİZLİ & ANIMASYONLU) --- */
+.copy-crosshair-btn {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ccc;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: var(--font-head);
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    
+    /* --- GİZLEME AYARLARI --- */
+    opacity: 0;                /* Başlangıçta görünmez */
+    transform: translateY(20px); /* Hafif aşağıda dursun */
+    transition: all 0.4s ease; /* Geçiş süresi */
+}
+
+/* KARTIN ÜZERİNE GELİNCE GÖRÜNSÜN */
+.pro-card:hover .copy-crosshair-btn {
+    opacity: 1;                /* Görünür yap */
+    transform: translateY(0);  /* Yerine kaydır */
+    transition-delay: 0.1s;    /* Kart yukarı kaydıktan az sonra gelsin (Sıralı animasyon) */
+}
+
+/* BUTONUN KENDİ HOVER EFEKTİ */
+.copy-crosshair-btn:hover {
+    background: white;
+    color: black;
+    transform: translateY(-2px); /* Tıklanabilir hissi versin */
+    box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+}
+
+/* KOPYALANDI DURUMU (Yeşil) */
+.copy-crosshair-btn.copied {
+    background: #00ff88;
+    color: black;
+    border-color: #00ff88;
+    opacity: 0; /* Kopyalandığında kaybolmasın */
+}
+
+.copy-crosshair-btn i { font-size: 0.9rem; }
