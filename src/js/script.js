@@ -308,3 +308,88 @@ function openModalFromMobile() {
             });
         });
     }
+
+
+
+    // ... Mevcut kodların en altı ...
+
+    // --- SCROLL TO TOP BUTONU ---
+    const scrollTopBtn = document.getElementById('scrollToTop');
+
+    window.addEventListener('scroll', () => {
+        // 300px aşağı inince butonu göster
+        if (window.scrollY > 300) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+        // En yukarıya yumuşakça kaydır
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+
+    // --- CUSTOM CURSOR (MOUSE TAKİBİ) ---
+    const cursor = document.querySelector('.cursor');
+    const follower = document.querySelector('.cursor-follower');
+    
+    document.addEventListener('mousemove', (e) => {
+        // İmleci mouse pozisyonuna getir
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        
+        // Takipçiyi biraz gecikmeli getir (Animasyon hissi)
+        setTimeout(() => {
+            follower.style.left = e.clientX + 'px';
+            follower.style.top = e.clientY + 'px';
+        }, 50);
+    });
+
+    // Tıklanabilir öğelere gelince imleci büyüt
+    const clickables = document.querySelectorAll('a, button, .pro-card, .news-card, .featured-video, .clip-item, .faq-question');
+    
+    clickables.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            follower.classList.add('active');
+        });
+        el.addEventListener('mouseleave', () => {
+            follower.classList.remove('active');
+        });
+    });
+
+    // ... Mevcut kodların en altı ...
+
+    // --- CROSSHAIR KOPYALAMA SİSTEMİ ---
+    const crosshairBtns = document.querySelectorAll('.copy-crosshair-btn');
+
+    crosshairBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Butondaki kodu al
+            const code = btn.getAttribute('data-code');
+            
+            // Panoya kopyala
+            navigator.clipboard.writeText(code).then(() => {
+                
+                // Butonu "Başarılı" moduna al
+                const originalText = btn.innerHTML; // Eski yazıyı sakla
+                
+                btn.classList.add('copied');
+                btn.innerHTML = '<i class="fas fa-check"></i> KOPYALANDI!';
+                
+                // 2 saniye sonra eski haline döndür
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = originalText;
+                }, 2000);
+                
+            }).catch(err => {
+                console.error('Kopyalama hatası:', err);
+                alert("Kopyalama başarısız oldu.");
+            });
+        });
+    });
