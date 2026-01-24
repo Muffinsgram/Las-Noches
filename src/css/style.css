@@ -631,7 +631,7 @@ footer { padding: 30px; text-align: center; color: #555; background: #080808; ma
 .f-logo span { color: var(--val-red); }
 .brand-col p { color: #888; line-height: 1.6; margin-bottom: 20px; }
 
-.f-socials { display: flex; gap: 15px; }
+.f-socials { display: flex; gap: 15px; padding-left: 6em;}
 .f-socials a {
     width: 40px; height: 40px; border-radius: 5px; background: #1a1a1a; color: white;
     display: flex; align-items: center; justify-content: center; transition: 0.3s;
@@ -669,4 +669,5 @@ footer { padding: 30px; text-align: center; color: #555; background: #080808; ma
     0% { transform: scale(0); opacity: 0; }
     80% { transform: scale(1.2); opacity: 1; }
     100% { transform: scale(1); }
+
 }
