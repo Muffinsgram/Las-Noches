@@ -1085,3 +1085,97 @@ img {
     background: #ff4655;
     color: white;
 }
+
+
+/* --- MATRIX / HACKER MODE --- */
+
+/* Matrix Canvas (Arka Plan) */
+#matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* En arkada dursun */
+    display: none; /* Başlangıçta gizli */
+    background: black;
+}
+
+/* Hacklendi Yazısı (Overlay) */
+#hackedOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 50, 0, 0.8); /* Koyu yeşil transparan */
+    z-index: 99999; /* En üstte */
+    display: none; /* Başlangıçta gizli */
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    pointer-events: none; /* Tıklamayı engellemesin */
+    animation: flashScreen 0.2s;
+}
+
+.hacked-text {
+    text-align: center;
+    border: 4px solid #0f0;
+    padding: 40px;
+    background: black;
+    box-shadow: 0 0 50px #0f0;
+    transform: rotate(-5deg);
+}
+
+.hacked-text h1 {
+    font-family: 'Courier New', monospace;
+    font-size: 4rem;
+    color: #0f0;
+    margin: 0;
+    text-shadow: 2px 2px 0px #003300;
+    animation: glitchText 0.3s infinite;
+}
+
+.hacked-text p {
+    font-family: 'Courier New', monospace;
+    color: #0f0;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-top: 10px;
+}
+
+/* --- GLITCH ANIMASYONLARI --- */
+@keyframes flashScreen {
+    0% { background: white; }
+    100% { background: rgba(0, 50, 0, 0.8); }
+}
+
+@keyframes glitchText {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+/* --- HACKED MODE AKTİFKEN SİTE RENKLERİ --- */
+body.hacked-mode {
+    --val-red: #0f0 !important; /* Kırmızıyı Neon Yeşil Yap */
+    --cs-orange: #00ff00 !important; /* Turuncuyu Yeşil Yap */
+    --text: #0f0 !important; /* Yazıları Yeşil Yap */
+    background: black !important;
+}
+
+/* Hack modunda resimleri ve kartları yeşile boya */
+body.hacked-mode img, 
+body.hacked-mode .pro-card,
+body.hacked-mode .card-img {
+    filter: sepia(100%) hue-rotate(80deg) saturate(300%) !important;
+    border-color: #0f0 !important;
+}
+
+body.hacked-mode ::selection {
+    background: #0f0;
+    color: black;
+}
