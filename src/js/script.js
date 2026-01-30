@@ -588,3 +588,133 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('click', (e) => {
         if (e.target == newsModal) closeNews();
     });
+
+
+
+    // =========================================
+    // 16. MATRIX HACKER MODE (KONAMI CODE)
+    // =========================================
+    
+    // Konami Kodu Sırası: Yukarı, Yukarı, Aşağı, Aşağı, Sol, Sağ, Sol, Sağ, B, A
+    const konamiCode = [
+        "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", 
+        "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", 
+        "b", "a"
+    ];
+    let konamiIndex = 0;
+
+    document.addEventListener('keydown', (e) => {
+        // Tuş sırasını kontrol et
+        if (e.key === konamiCode[konamiIndex] || e.key.toLowerCase() === konamiCode[konamiIndex]) {
+            konamiIndex++;
+            
+            // Eğer tüm şifre doğru girildiyse
+            if (konamiIndex === konamiCode.length) {
+                activateHackerMode();
+                konamiIndex = 0; // Sıfırla
+            }
+        } else {
+            konamiIndex = 0; // Hata yaparsa sıfırla
+        }
+    });
+
+    function activateHackerMode() {
+        const body = document.body;
+        const canvas = document.getElementById('matrixCanvas');
+        const overlay = document.getElementById('hackedOverlay');
+        const ctx = canvas.getContext('2d');
+
+        // 1. CSS Sınıfını Ekle (Renkleri değiştirir)
+        body.classList.add('hacked-mode');
+        
+        // 2. Overlay'i Göster (Sistem Hacklendi Yazısı)
+        overlay.style.display = 'flex';
+        
+        // 3 saniye sonra yazıyı kaldır ama modu tut
+        setTimeout(() => {
+            overlay.style.display = 'none';
+        }, 3000);
+
+        // 3. Matrix Animasyonunu Başlat
+        canvas.style.display = 'block';
+        
+        // Canvas Boyutlarını Ayarla
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Matrix Karakterleri
+        const chars = "LASNOCHES010101XYHZ";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        // Her kolon için başlangıç Y pozisyonu (hepsi 1'den başlar)
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function drawMatrix() {
+            // Hafif siyah perde (İz bırakma efekti için)
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "#0f0"; // Neon Yeşil Yazı
+            ctx.font = fontSize + "px monospace";
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                // Rastgele resetleme (Ekranın altına gelince)
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                drops[i]++;
+            }
+            requestAnimationFrame(drawMatrix);
+        }
+
+        drawMatrix();
+
+        // Pencere boyutu değişirse canvas'ı güncelle
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
+        // Opsiyonel: Konsola mesaj bas
+        console.log("%c SYSTEM BREACH DETECTED. WELCOME TO LAS NOCHES. THIS MUFFINSGRAM", "background: #000; color: #0f0; font-size: 20px; padding: 10px;");
+    }
+
+    // =========================================
+    // 17. MOBİL İÇİN HACKER MODE (LOGOYA 7 KEZ TIKLA)
+    // =========================================
+    
+    const logoArea = document.querySelector('.brand'); // "LAS NOCHES" yazısı
+    let tapCount = 0;
+    let tapTimer;
+
+    if(logoArea) {
+        logoArea.addEventListener('click', (e) => {
+            // Tıklama sayısını artır
+            tapCount++;
+            
+            // Kullanıcıya ipucu ver (Opsiyonel: Konsola yazar)
+            console.log(`Hacker Mode: ${tapCount}/7`);
+
+            // Eğer 7 kere tıkladıysa
+            if (tapCount === 7) {
+                activateHackerMode(); // Mevcut fonksiyonu çalıştır
+                tapCount = 0; // Sayacı sıfırla
+                // Titreşim ver (Sadece Android'de çalışır)
+                if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+            }
+
+            // Eğer 1 saniye içinde tekrar basmazsa sayacı sıfırla
+            clearTimeout(tapTimer);
+            tapTimer = setTimeout(() => {
+                tapCount = 0;
+            }, 500); // Yarım saniye içinde basması lazım
+        });
+    }
