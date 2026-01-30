@@ -145,7 +145,7 @@ input:checked + .radio-box.cs { background: var(--cs-orange); color: white; bord
 .hero {
     height: 85vh; display: flex; align-items: center; justify-content: space-between;
     padding: 0 10%; position: relative;
-    background: linear-gradient(to right, rgba(5,5,5,0.9), rgba(5,5,5,0.4)), url('../img/banner.png');
+    background: linear-gradient(to right, rgba(5,5,5,0.9), rgba(5,5,5,0.4)), url('');
     background-size: cover; background-position: center;
 }
 .game-tags { margin-bottom: 15px; }
@@ -911,4 +911,177 @@ footer { padding: 30px; text-align: center; color: #555; background: #080808; ma
 
 .copy-crosshair-btn i { font-size: 0.9rem; }
 
-body::selection { background: var(--val-red); color: white;}
+
+
+::selection {
+    background: var(--val-red);
+    color: white;
+}
+::-moz-selection { /* Firefox Desteği */
+    background: var(--val-red);
+    color: white;
+}
+
+
+img {
+    -webkit-user-drag: none; 
+    user-select: none;      
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--val-red), var(--cs-orange)); 
+    width: 0%; 
+    z-index: 10000; 
+    box-shadow: 0 0 10px var(--val-red); 
+    border-radius: 0 2px 2px 0;
+}
+
+
+.cursor-blink {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background-color: var(--cs-orange);
+    margin-left: 2px;
+    animation: blink 1s infinite;
+    vertical-align: bottom;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* --- FOOTER SCRIM BUTONU --- */
+.scrim-trigger-btn {
+    margin-top: 20px;
+    background: transparent;
+    border: 1px solid #333;
+    color: #888;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: var(--font-head);
+    font-size: 1rem;
+    letter-spacing: 1px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.scrim-trigger-btn:hover {
+    border-color: var(--val-red);
+    color: white;
+    background: rgba(255, 70, 85, 0.1);
+}
+
+
+/* 
+.gradient-text {
+    background: linear-gradient(
+        45deg, 
+        var(--val-red), 
+        var(--cs-orange), 
+        #ff0055, 
+        var(--val-red)
+    );
+    background-size: 300% 300%; 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientFlow 4s ease infinite; 
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+} */
+
+
+
+/* --- DISCORD AUTH STYLES --- */
+.discord-login-btn {
+    background: #5865F2;
+    color: white;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-family: var(--font-head);
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+}
+.discord-login-btn:hover {
+    background: #4752c4;
+    transform: translateY(-2px);
+}
+
+.user-profile-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(88, 101, 242, 0.15);
+    border: 1px solid #5865F2;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    animation: fadeIn 0.5s;
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #5865F2;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.user-info h4 {
+    color: white;
+    font-family: var(--font-head);
+    font-size: 1.4rem;
+    margin: 0;
+    line-height: 1;
+}
+
+.user-info span {
+    color: #ccc;
+    font-size: 0.8rem;
+    font-family: var(--font-body);
+}
+
+.logout-btn {
+    background: transparent;
+    border: 1px solid #ff4655;
+    color: #ff4655;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    margin-left: auto;
+    transition: 0.3s;
+}
+.logout-btn:hover {
+    background: #ff4655;
+    color: white;
+}
